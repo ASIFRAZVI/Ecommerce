@@ -23,7 +23,7 @@ const sendresetpasswordmail=async(email,token)=>{
         from:process.env.emailuser,
         to:email,
         subject:'For Reset Password',
-        html:`<p><a href="http://localhost:3000/resetpass?token=${token}">CLICK HERE TO RESET PASSWORD</a></p>`,
+        html:`<p><a href="https://milkomilkyzpure.onrender.com/resetpass?token=${token}">CLICK HERE TO RESET PASSWORD</a></p>`,
        }
        transpoter.sendMail(mailoption)
   }catch(error){
