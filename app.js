@@ -20,6 +20,7 @@ const galleryrouter = require('./routes/gallery');
 const userrouter = require('./routes/userroute');
 const dashboardrouter = require('./routes/dashboard');
 
+const paymentrouter = require('./routes/paymentroute');
 
 
 
@@ -42,6 +43,8 @@ app.use(frontpagerouter);
 app.use(galleryrouter);
 app.use(userrouter);
 app.use(dashboardrouter);
+app.use(paymentrouter);
+
 
 app.listen(port,()=>{
     console.log("server started")

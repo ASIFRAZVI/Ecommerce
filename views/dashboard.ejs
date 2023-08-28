@@ -16,16 +16,16 @@
 
 </head>
 <body>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <!-- ----------------------------------------NAVBAR----------------------------------------------------->
     <nav class="nav nav_top">
         <div class="logo">
-            <a href="index.html"><img src="images/logo.jpg" width="50"></a>
+            <a href="/dashboard"><img src="images/logo.jpg" width="50"></a>
         </div>
         <div class="nav_side">
             <a href="/about">ABOUT</a>
             <a href="/gallery">GALLERY</a>
             <a href="/contact">CONTACT</a>
-            <a href="/cart">CART</a>
             <a href="/logout">LOGOUT</a>
        
         </div>
@@ -43,7 +43,7 @@
                     <span>DIRECT DAIRY TO YOUR TABLE!</span>
                 </h2>
                 <div class="slide_btn">
-                    <a href="#">SHOP NOW</a>
+                    <a href="#products">SHOP NOW</a>
                 </div>
                 
             </div>
@@ -63,7 +63,7 @@
             Immerse yourself in the natural flavors and benefits of fresh organic milk, making each moment a delightful and nourishing experience.
             </p>
             <div class="side_btn">
-                <a href="#">SHOP NOW</a>
+                <a href="#products">SHOP NOW</a>
             </div>
         </div>
 
@@ -79,7 +79,7 @@
     </div>
 
 
-    <div class="product">
+    <div class="product" id="products">
         <h2>OUR PRODUCTS</h2>
         <div class="product_container">
 
@@ -90,8 +90,12 @@
                 <div class="item_content">
                     <h3>Half Liter with Packaging</h3>
                     <p>Fresh Milk at your Doorstep</p>
+                    <h3>Market Price-₹40</h3>
+                    <h4>Our Price-₹29/-ONLY</h4>
+                    <h4>milk/month-₹859/-ONLY</h4>
+                   
                     <br><br>
-                    <a href="#">Order Now</a>
+                    <a href="#" class="order-button" data-amount="85900" >Order Now</a>
                 </div>
             </div>
 
@@ -102,8 +106,11 @@
                 <div class="item_content">
                     <h3>One Liter with Packaging</h3>
                     <p>Fresh Milk at your Doorstep</p>
+                    <h3>Market Price-₹80</h3>
+                    <h4>Our Price-₹56/-ONLY</h4>
+                    <h4>milk/month-₹1679/-ONLY</h4>
                     <br><br>
-                    <a href="#">Order Now</a>
+                    <a href="#"class="order-button" data-amount="167900">Order Now</a>
                 </div>
             </div>
 
@@ -114,8 +121,11 @@
                 <div class="item_content">
                     <h3>Half Liter without Packaging</h3>
                     <p>Fresh Milk at your Doorstep</p>
+                    <h3>Market Price-₹35</h3>
+                    <h4>Our Price-₹25/-ONLY</h4>
+                    <h4>milk/month-₹749/-ONLY</h4>
                     <br><br>
-                    <a href="#">Order Now</a>
+                    <a href="#" class="order-button" data-amount="74900">Order Now</a>
                 </div>
             </div>
 
@@ -126,14 +136,18 @@
                 <div class="item_content">
                     <h3>One Liter without Packaging</h3>
                     <p>Fresh Milk at your Doorstep</p>
+                    <h3>Market Price-₹72</h3>
+                    <h4>Our Price-₹50/-ONLY</h4>
+                    <h4>milk/month-₹1499/-ONLY</h4>
                     <br><br>
-                    <a href="#">Order Now</a>
+                    <a href="#" class="order-button" data-amount="149900">Order Now</a>
                 </div>
             </div>
         </div>
     </div>
+    <h3>NOTE:- We Accept only on monthly basis you have to pay amount on 5th of every month if not delevery will be discontineued!</h3>
     <hr>
-
+    
 <!-- --------------------------------------------new eam----------------------------------------------------------->
 
 <div class="product">
@@ -218,7 +232,7 @@
 
     <footer>
         <div class="footer_logo">
-            <a href="index.html"><img src="images/logo.jpg" width="50"></a>
+            <a href="/dahboard"><img src="images/logo.jpg" width="50"></a>
         </div>
         <div class="pages">  
             <h3>Customer Care</h3>
@@ -253,6 +267,28 @@
  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<script>
+    // Smooth scrolling function
+    function smoothScroll(target) {
+        const targetElement = document.querySelector(target);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    // Attach click event to the "SHOP NOW" link
+    const shopNowLink = document.querySelector('a[href="#products"]');
+    if (slide_btn) {
+        slide_btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            smoothScroll('#products');
+        });
+    }
+</script>
+<script src="dashboard.js"></script>
 
 </body>
 </html>
