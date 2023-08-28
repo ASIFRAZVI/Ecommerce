@@ -50,8 +50,7 @@ const membership1 = new membership({
       
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to create order' });
+    res.render("error2");
   }
 };
 
@@ -62,7 +61,7 @@ exports.saveMembership = async (req, res) => {
     // Find the membership using the orderId
     const membership1 = await membership.findOne({ orderId });
     if (!membership1) {
-      return res.status(404).json({ error: 'Membership not found' });
+      res.render("error2");
     }
     // Update the membership with paymentId
     membership1.paymentId = paymentId;
@@ -72,7 +71,7 @@ exports.saveMembership = async (req, res) => {
     // Find the user using userId and update isPro field
     const user = await signup.findById(membership1.userId);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      res.render("error2");
     }
     await user.save();
 
