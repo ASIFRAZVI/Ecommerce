@@ -27,4 +27,11 @@ router.get('/gallery',(req,res)=>{
     res.render("error2")
   })
 
+  router.get('/forgotpass',(req,res)=>{
+    res.render("forgotpass")
+  })
+
+  router.get('/resetpass',(req,res)=>{
+    res.render("resetpass")
+  })
 module.exports=router;
