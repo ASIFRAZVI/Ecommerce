@@ -3,6 +3,8 @@ const cors=require('cors')
 const dotenv=require('dotenv')
 const path=require('path');
 const bodyparser=require('body-parser')
+const cookieParser = require('cookie-parser');
+
 
 const port=3000 || process.env.port
 dotenv.config()
@@ -29,6 +31,7 @@ app.set('view engine', 'ejs');
 app.use(cors())
 app.use(express.urlencoded({ extended:false}))
 //app.use(express.json())
+app.use(cookieParser())
 app.use(bodyparser.json({extended:false}))
 
 //public static style path

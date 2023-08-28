@@ -18,4 +18,13 @@ router.get('/gallery',(req,res)=>{
     res.render("contact")
   })
 
+  
+  router.get('/error1',(req,res)=>{
+    res.render("error1")
+  })
+
+  router.get('/error2',(req,res)=>{
+    res.render("error2")
+  })
+
 module.exports=router;
