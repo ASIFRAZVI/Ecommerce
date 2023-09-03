@@ -1,73 +1,343 @@
-/*------------------------------------------------NAVBAR----------------------------------------*/
-.nav
-{
-    background-color: white;
-    z-index: 9;
-    padding-left: 50px;
-    padding-right: 50px;
-    display:flex;
-    box-shadow: 0px 3px 65px 0px rgba(0,0,0,.15);
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+html{
+    font-size: 62.5%; /* 1rem = 10px */
+    scroll-behavior: smooth;
 }
-.nav_top
-{
-    position:fixed;
-    top:0;
-    right:0;
-    left:0;
-}
-.logo
-{
-    float:left;
-    width: 30%;
-}
-.logo img
-{
-    padding: 8px;
-    width:20%;
-    margin-left:10%;
-}
-.nav_side
-{
-    float:right;
-    width:45%;
-    margin-top: 20px;
-}
-.nav_side a
-{
-    text-decoration: none;
-    margin-right: 10px;
-    margin-left:22px;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-left: 15px;
-    color: rgb(37, 0, 19);
-    font-weight: bold;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    
-}
-.nav_side a:hover
-{
-    color: rgb(253, 0, 84);
-    transition: all 1s ease;
-}
-/*-------------------------------------------FIRST CAROUSEL----------------------------------------*/
-.slide
-{
-    padding:0px;
-    height: 30px;
-}
-.slide .slide_container
-{
-    text-align:center;
+:root{
+/* Font Sizes & Family */
+/* if we set html's font size 62.5% then 1rem = 10px */
+
+--body-font: 'Poppins', sans-serif;
+
+--big-font: 4rem;
+--h1-font: 3.6rem;
+--h2-font: 2.4rem;
+--h3-font: 2rem;
+--h4-font: 1.8rem;
+--normal-font: 1.6rem;
+--small-font: 1.4rem;
+--smaller-font: 1.3rem;
+
+/* Font Weight ***/
+--font-regular: 400;
+--font-medium: 500;
+--font-semi-bold: 600;
+
+/* Color Variables */
+--primary-color: #C87E4F;
+--primary-color-hover: #C2703D;
+--text-color: #333;
+--text-color-light: #888682;
+--border-color: #484848;
+--white-color: #FFF;
+--section-bg: #2C3034;
+
+/* z-index */
+--z-overlay: 10;
+--z-fixed: 100;
+
+/* transition */
+--tran-0-2: 0.2s;
+--tran-0-3: 0.3s;
+--tran-0-5: 0.5s;
 }
 
-.slide_con
-{
+/*Font sizes For Small Screen 968px */
+@media screen and (max-width: 990px) {
+:root {
+  --big-font: 3.5rem;
+  --h1-font: 2.4rem;
+  --h2-font: 2rem;
+  --h3-font: 1.8rem;
+  --h4-font: 1.6rem;
+  --normal-font: 1.5rem;
+  --small-font: 1.3rem;
+  --smaller-font: 1.2rem;
+}
+}
+
+
+/* Pre-CSS */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  overflow-x: hidden;
+  background-color: var(--white-color);
+}
+
+/* Custom Scrollbar */
+::selection{
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+::-webkit-scrollbar{
+  width: 8px;
+}
+::-webkit-scrollbar-track{
+  background-color: #f9f1ec;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 1rem;
+  background-color: var(--primary-color);
+}
+::-webkit-scrollbar-thumb:hover{
+  border-radius: 1rem;
+  background-color: var(--primary-color-hover)
+}
+
+body,
+button,
+input{
+  font-family: var(--body-font);
+  font-size: var(--normal-font);
+  font-weight: var(--font-regular);
+  color: var(--text-color);
+}
+
+input{
+  outline: none;
+}
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Reusuable CSS */
+.section{
+  padding: 7rem 2rem;
+}
+.container{
+  max-width: 1030px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  column-gap: 0.6rem;
+}
+.button{
+  border: none;
+  outline: none;
+  color: var(--white-color);
+  padding: 1.4rem 4rem;
+  border-radius: 3rem;
+  background-color: var(--primary-color);
+  transition: var(--tran-0-3);
+  cursor: pointer;
+}
+.button:hover{
+  background-color: var(--primary-color-hover);
+}
+.section-subtitle,
+.content-subtitle{
+  color: var(--primary-color);
+  font-size: var(--normal-font);
+  letter-spacing: 1px;
+  font-weight: var(--font-medium);
+  text-align: center;
+}
+.section-title,
+.content-title{
+  text-align: center;
+  font-size: var(--h2-font);
+  font-weight: var(--font-medium);
+  margin: 1rem 0;
+}
+.section-description,
+.content-description{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.section-description{
+  padding: 0 16rem;
+}
+/* Header */
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 7rem;
+  width: 100%;
+  z-index: var(--z-fixed);
+  transition: var(--tran-0-5);
+}
+.header-active{
+  height: 6rem;
+  background-color: var(--white-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* nav */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 1050px;
+  width: 90%;
+  margin: auto;
+}
+
+.navbar {
+  width: 100%;
+  box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+}
+
+.navbar .menu-items {
+  display: flex;
+}
+
+.navbar .nav-container li {
+  list-style: none;
+}
+
+.navbar .nav-container a {
+  text-decoration: none;
+  color: #0e2431;
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding: 0.7rem;
+}
+
+.navbar .nav-container a:hover{
+    font-weight: bolder;
+}
+
+.nav-container {
+  display: block;
+  position: relative;
+  height: 60px;
+}
+
+.nav-container .checkbox {
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 32px;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.nav-container .hamburger-lines {
+  display: block;
+  height: 26px;
+  width: 32px;
+  position: absolute;
+  top: 17px;
+  left: 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-container .hamburger-lines .line {
+  display: block;
+  height: 4px;
+  width: 100%;
+  border-radius: 10px;
+  background: #0e2431;
+}
+
+.nav-container .hamburger-lines .line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line2 {
+  transition: transform 0.2s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.navbar .menu-items {
+    padding-top: 120px;
+    background-color:rgb(247, 247, 252); /* Add your desired background color here */
+    height: 100vh;
+    width: 80%;
+    transform: translate(-150%);
+    display: flex;
+    flex-direction: column;
+    margin-left: -40px;
+    padding-left: 50px;
+    transition: transform 0.5s ease-in-out;
+    text-align: center;
+  }
+.navbar .menu-items li {
+  margin-bottom: 1.0rem;
+  font-size: 3.5rem;
+  font-weight: 1000;
+}
+
+
+.nav-container input[type="checkbox"]:checked ~ .menu-items {
+  transform: translateX(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+  transform: rotate(45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+  transform: scaleY(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+  transform: rotate(-45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .logo{
+  display: none;
+}
+
+
+/* Home */
+/* Base styles for all screen sizes */
+.slide {
+    padding: 0;
+    height: 30px;
+}
+
+.slide .slide_container {
+    text-align: center;
+}
+
+.slide_con {
     background-image: url("images/milk-1.png");
     background-position: center;
     background-size: cover;
@@ -75,14 +345,14 @@
     background-attachment: fixed;
     height: 100vh;
 }
-.slide_con .slide_content
-{
+
+.slide_con .slide_content {
     padding-top: 12%;
     margin-left: 10%;
     margin-right: 10%;
 }
-.slide_con .slide_content h2
-{
+
+.slide_con .slide_content h2 {
     color: rgb(44, 32, 16);
     font-size: 430%;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
@@ -91,25 +361,25 @@
     line-height: 35px;
     position: relative;
 }
-.slide_con .slide_content h2 span
-{
-    font-size:50%;
+
+.slide_con .slide_content h2 span {
+    font-size: 50%;
     opacity: 0.9;
     font-weight: 400;
     line-height: 20px;
 }
-.slide_con .slide_content .slide_btn
-{
-    margin-top:10%;
+
+.slide_con .slide_content .slide_btn {
+    margin-top: 10%;
     text-align: center;
-    width:100%;
+    width: 100%;
     position: relative;
 }
-.slide_con .slide_content .slide_btn a
-{
+
+.slide_con .slide_content .slide_btn a {
     text-decoration: none;
     font-size: large;
-    margin:32%;
+    margin: 32%;
     padding: 10px 20px;
     font-weight: bold;
     color: rgb(10, 19, 48);
@@ -119,225 +389,166 @@
     border-radius: 10px;
     transition: 0.5s;
 }
-.slide_con .slide_content .slide_btn a:hover
-{
+
+.slide_con .slide_content .slide_btn a:hover {
     background-color: white;
     color: rgb(37, 0, 19);
     border: none;
     border-bottom: 4px solid orange;
-    transition:0.5s;
+    transition: 0.5s;
 }
-/*------------------------------------------------SIDE----------------------------------------*/
-.side 
-{
-    margin-top:5%;
-    margin-bottom: 5%;
-    display: flex;
+
+/* Media queries for responsive design */
+
+/* Adjust styles for screens smaller than 768px (e.g., mobile devices) */
+@media screen and (max-width: 768px) {
+    .slide_con .slide_content h2 {
+        font-size: 200%; /* Adjust the font size for smaller screens */
+        margin-top: 45%;
+    }
+    
+    .slide_con .slide_content .slide_btn a {
+        margin: 10%; /* Adjust the button margin for smaller screens */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* About */
+.about-area{
+    padding-top: 6%;
+    padding-bottom: 6%;
+}
+.about-img{
+    position: relative;
+}
+.about-img:before{
+    position: absolute;
+    content: '';
+    right: -30px;
+    top: 30px;
+    border: 9px solid rgba(255, 255, 255, 0.5);
+    width: 100%;
+    height: 100%;
+}
+.about-img img{
+    width: 100%;
+
+}
+.about-text{
+    padding-top: 0%;
+}
+.about-text h2{
     text-align: center;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-.side .left
-{
-    float: left;
-}
-.side .right
-{
-    float:right;
-    padding-left: 10%;
-}
-.side .right h2
-{
-    font-size: 250%;
-}
-.side .right p
-{
-    width: 50%;
-    font-size: 140%;
-    margin-left:25%;
-    margin-top: 8%;
-}
-.side .right .side_btn
-{
-    margin-top:3%;
-}
-.side .right .side_btn a
-{
-    text-decoration: none;
-    font-size: large;
-    margin:32%;
-    padding: 10px 20px;
-    font-weight: bold;
     color: black;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-    border: 4px solid black;
-    border-radius: 10px;
-    transition: 0.5s;
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
 }
-.side .right .side_btn a:hover
-{
-    background-color: black;
-    color: white;
-    border: none;
-    border-bottom: 4px solid rgb(255, 34, 144);
-    transition:0.5s;
+.about-text p{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    color: black;
 }
-
-/*------------------------------------------------MAIN----------------------------------------*/
-.main
-{
-    background-image: url("images/milk-2.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 60vh;
-}
-.main .main_content
-{
-    padding: 100px;
-    text-align: center;
-}
-.main .main_content h2
-{
-    color: white;
-    background-color: rgb(10, 61, 136);
-    font-size: 38px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-weight: bolder;
-    text-align: center;
-    line-height: 35px;
-    width:50%;
-    padding: 50px;
-    padding-left: 100px;
-    padding-right: 100px;
-    border-radius: 50%;
-    margin-left: 250px;
-    margin-right: 200px;
-    margin-top: -10px;
-    border: 6px solid rgb(7, 126, 80);
-    box-shadow: 6px 6px rgba(0,0,0,.45);
-}
-.main .main_content h2 span
-{
-    font-size:30%;
-    opacity: 0.9;
-    font-weight: 400;
-    line-height: 20px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-/*--------------------------------------------PRODUCTS----------------------------------------*/
-.product
-{
-    padding-bottom: 50px;
-}
-.product h2
-{
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    color: rgb(92, 0, 47);
-    font-size: 35px;
-    text-align: center;
-    padding: 20px;
-}
-.product .product_container
-{
-    display:flex;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-.product .product_container .item
-{
-    width:25%;
-    margin: 10px;
-    height: 10%;
-}
-.product .product_container .item:hover
-{
-    box-shadow:0px 3px 65px 0px rgb(255, 189, 165);
-}
-.product .product_container .item .item_img
-{
-    width:100%;
-    height: 20%;
-    overflow:hidden;
-}
-.product .product_container .item .item_img img
-{
-    width:100%;
-    height: 20%;
-}
-.product .product_container .item .item_content
-{
-    text-align: center;
-}
-.product .product_container .item .item_content h3
-{
-    font-size: 15px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    line-height: 2px;
-}
-.product .product_container .item .item_content p
-{
-    font-size: 15px;
-    line-height: 15px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-.product .product_container .item .item_content a
-{
-    text-decoration: none;
-    padding: 5px 10px;
-    font-weight: bold;
-    color:rgb(212, 0, 106);
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-    border: 3px solid rgb(212, 0, 106);
-    transition: 0.5s;
-}
-.product .product_container .item .item_content a:hover
-{
-    background-color: rgb(212, 0, 106);
-    color: white;
-    border: none;
-    transition:0.5s;
+.about-text a{
+    background: #7b64ec;
+    color: #fff;
+    padding: 7px 15px;
+    display: inline-block;
+    margin-top: 20px;
 }
 
-   
-   
-.team
-{
-    padding: 50px;
+body {
+    background-color: #EDEDED !important;
 }
-.team h2
-{
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; 
-    color: rgb(92, 0, 47);
-    font-size: 35px;
-    text-align: center;
+
+
+  /* Media Queries */
+@media (max-width: 768px) {
+    .about-area {
+        padding: 10% 5%;
+    }
+
+    .about-text {
+        padding: 10% 0;
+    }
+
+    .about-text h2 {
+        font-size: 24px;
+    }
+
+    .about-text p {
+        font-size: 14px;
+    }
 }
-.team .team_container
-{
-    display: flex;
+
+
+
+
+/* Review */
+.review{
+  background-color: #f2f2f2;
 }
-.team .team_container .team_video
-{
-    width:50%;
-    padding:20px;
+.review .section-title,
+.review .section-description{
+  color: var(--text-color);
 }
-.team .team_container .team_video video
-{
-    width:100%;
-    border: 8px solid rgb(161, 0, 83);
-    outline: none;
+.testi-content{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  row-gap: 2rem;
+  flex-direction: column;
 }
-.team .team_container .team_content
-{
-    width:40%;
-    padding:20px;
-    margin-left:50px;
-    margin-top: 4%;
-    font-size: large;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; 
+.review-img{
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  margin-bottom: 2rem;
 }
+.review-quote{
+  padding: 0 15rem;
+  text-align: center;
+}
+.quote-icon{
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+.testi-personDetails{
+  flex-direction: column;
+}
+.testi-personDetails .name{
+  font-size: 1.8rem;
+  font-weight: var(--font-medium);
+}
+
+/* swiper btn */
+.review .swiper-navBtn{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.review .swiper-button-next{
+  right: 2rem;
+  transform: translateY(2rem);
+}
+.review .swiper-button-prev{
+  left: 2rem;
+  transform: translateY(2rem);
+}
+.review .swiper-navBtn:hover{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+
 
 /*--------------------------------------------FOOTER----------------------------------------*/
 footer
@@ -447,683 +658,220 @@ footer p
 
 
 
-  /* Media Query for Tablets */
-  @media (max-width: 768px) {
-   /*------------------------------------------------NAVBAR----------------------------------------*/
-.nav
-{
-    background-color: white;
-    z-index: 8;
-    padding-left: 50px;
-    padding-right: 50px;
-    display:flex;
-    box-shadow: 0px 3px 65px 0px rgba(0,0,0,.15);
+
+
+/* Responive media */
+@media screen and (max-width: 1150px) {
+  .swiper-button-prev {
+    left: 10rem;
 }
-.nav_top
-{
-    position:fixed;
-    top:0;
-    right:0;
-    left:0;
+  .swiper-button-next {
+    right: 10rem;
 }
-.logo
-{
-    float:left;
-    width: 50%;
-}
-.logo img
-{
-    padding: 8px;
-    width:30%;
-    margin-left:10%;
-}
-.nav_side
-{
-    float:right;
-    width:135%;
-    margin-top: 20px;
-}
-.nav_side a
-{
-    text-decoration: none;
-    margin-right: 10px;
-    margin-left:22px;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-left: 15px;
-    color: rgb(37, 0, 19);
-    font-weight: bold;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    
-}
-.nav_side a:hover
-{
-    color: rgb(253, 0, 84);
-    transition: all 1s ease;
-}
-/*-------------------------------------------FIRST CAROUSEL----------------------------------------*/
-.slide
-{
-    padding:0px;
-    height: 30px;
-}
-.slide .slide_container
-{
-    text-align:center;
 }
 
-.slide_con
-{
-    background-image: url("images/milk-1.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh;
-    
+@media screen and (max-width: 1000px) {
+  .swiper-button-prev {
+    left: 3rem;
 }
-.slide_con .slide_content
-{
-    padding-top: 20%;
-    margin-left: 0%;
-    margin-right: 0%;
+  .swiper-button-next {
+    right: 3rem;
 }
-.slide_con .slide_content h2
-{
-    color: rgb(44, 32, 16);
-    font-size: 350%;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-weight: bolder;
-    text-align: center;
-    line-height: 35px;
-    position: relative;
+  .section-description {
+    padding: 0 8rem;
+  }
+  .about-imageContent {
+    height: 400px;
+  }
+  .aboutImg-textBox {
+    padding: 1.5rem 2rem;
+  }
+  .menu .menu-content {
+    grid-template-columns: 1.5fr 1fr;
+    column-gap: 3rem;
+  }
+  .brand-images{
+    grid-template-columns: repeat(3,1fr);
+  }
+
 }
-.slide_con .slide_content h2 span
-{
-    font-size:50%;
-    opacity: 0.9;
-    font-weight: 400;
-    line-height: 20px;
+
+@media screen and (max-width: 768px) {
+  .section.review{
+    padding: 7rem 1rem 3rem;
+  }
+  .review .swiper{
+    padding-bottom: 6.5rem;
+  }
+  .swiper-navBtn{
+    visibility: hidden;
+  }
+  .swiper-pagination-bullet{
+    visibility: visible;
+  }
+
+  .section {
+    padding: 7rem 1rem;
 }
-.slide_con .slide_content .slide_btn
-{
-    margin-top:10%;
-    text-align: center;
-    width:100%;
-    position: relative;
+.section-description,
+.review-quote{
+  padding: 0 6rem;
 }
-.slide_con .slide_content .slide_btn a
-{
-    text-decoration: none;
-    font-size: large;
-    margin:32%;
-    padding: 10px 20px;
-    font-weight: bold;
-    color: rgb(10, 19, 48);
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-    border: 4px solid rgb(168, 109, 109);
-    border-radius: 10px;
-    transition: 0.5s;
+.about-content{
+  grid-template-columns: 1fr;
+  row-gap: 3rem;
+  justify-items: center;
 }
-.slide_con .slide_content .slide_btn a:hover
-{
-    background-color: white;
-    color: rgb(37, 0, 19);
+.about .content-subtitle,
+.about .content-title,
+.about .content-description{
+  text-align: center;
+}
+.about-details {
+  justify-items: center;
+}
+.about-lists{
+  justify-content: center;
+}
+.menu .menu-content {
+  grid-template-columns: 1fr;
+  row-gap: 3rem;
+}
+.footer-container{
+  row-gap: 1.5rem;
+}
+}
+
+@media screen and (max-width: 600px){
+  .container{
+    padding: 0.5rem;
+  }
+  .section-description, .review-quote{
+    padding: 0;
+  }
+  .aboutImg-textBox{
+    right: -2rem
+  }
+  .menuItem-price{
     border: none;
-    border-bottom: 4px solid orange;
-    transition:0.5s;
+  }
+  .menu-img{
+    height: 70px;
+    width: 70px;
+    margin-right: 0;
 }
-/*------------------------------------------------SIDE----------------------------------------*/
-.side {
-    margin-top: 2%; /* Decrease top margin */
-    margin-bottom: 2%; /* Decrease bottom margin */
-    display: flex;
-    text-align: center;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-
-.side .left {
-    float: left;
-    
-}
-.side .right
-{
-    float:right;
-    padding-left: 0%;
-}
-.side .right h2
-{
-    font-size: 160%;
-}
-.side .right p
-{
-    width: 60%;
-    font-size: 86%;
-    margin-left:25%;
-    margin-top: 8%;
-}
-.side .right .side_btn
-{
-    margin-top:3%;
-}
-.side .right .side_btn a {
-    text-decoration: none;
-    font-size: 10px; /* Adjust font size to make it smaller */
-    margin: 5px; /* Decrease margin for spacing */
-    padding: 5px 10px; /* Adjust padding for a smaller button */
-    font-weight: bold;
-    color: black;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-    border: 2px solid black; /* Decrease border size */
-    border-radius: 5px; /* Decrease border radius */
-    transition: 0.5s;
-}
-
-.side .right .side_btn a:hover
-{
-    background-color: black;
-    color: white;
-    border: none;
-    border-bottom: 4px solid rgb(255, 34, 144);
-    transition:0.5s;
-}
-
-/*------------------------------------------------MAIN----------------------------------------*/
-.main
-{
-    background-image: url("images/milk-2.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 50vh;
-}
-.main .main_content
-{
-    padding: 100px;
-    text-align: center;
-}
-.main .main_content h2
-{
-    color: white;
-    background-color: rgb(10, 61, 136);
-    font-size: 30px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-weight: bolder;
-    text-align: center;
-    line-height: 35px;
-    width:60%;
-    padding: 40px;
-    padding-left: 80px;
-    padding-right: 100px;
-    border-radius: 50%;
-    margin-left: 150px;
-    margin-right: 200px;
-    margin-top: -10px;
-    border: 6px solid rgb(7, 126, 80);
-    box-shadow: 6px 6px rgba(0,0,0,.45);
-}
-.main .main_content h2 span
-{
-    font-size:30%;
-    opacity: 0.9;
-    font-weight: 400;
-    line-height: 20px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-/*--------------------------------------------PRODUCTS----------------------------------------*/
-.product
-{
-    padding-bottom: 50px;
-}
-.product h2
-{
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    color: rgb(92, 0, 47);
-    font-size: 35px;
-    text-align: center;
-    padding: 20px;
-}
-.product .product_container
-{
-    display:flex;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-.product .product_container .item
-{
-    width:25%;
-    margin: 10px;
-    height: 10%;
-}
-.product .product_container .item:hover
-{
-    box-shadow:0px 3px 65px 0px rgb(255, 189, 165);
-}
-.product .product_container .item .item_img
-{
-    width:100%;
-    height: 20%;
-    overflow:hidden;
-}
-.product .product_container .item .item_img img
-{
-    width:100%;
-    height: 20%;
-}
-.product .product_container .item .item_content
-{
-    text-align: center;
-}
-.product .product_container .item .item_content h3
-{
-    font-size: 11px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    line-height: 2px;
-}
-.product .product_container .item .item_content p
-{
-    font-size: 11px;
-    line-height: 15px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-.product .product_container .item .item_content a
-{
-    text-decoration: none;
-    padding: 5px 10px;
-    font-weight: bold;
-    color:rgb(212, 0, 106);
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-    border: 3px solid rgb(212, 0, 106);
-    transition: 0.5s;
-}
-.product .product_container .item .item_content a:hover
-{
-    background-color: rgb(212, 0, 106);
-    color: white;
-    border: none;
-    transition:0.5s;
-}
-
-   
-   
-.team
-{
-    padding: 50px;
-}
-.team h2
-{
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; 
-    color: rgb(92, 0, 47);
-    font-size: 35px;
-    text-align: center;
-}
-.team .team_container
-{
-    display: flex;
-}
-.team .team_container .team_video
-{
-    width:50%;
-    padding:20px;
-    margin-top: 5%;
-}
-.team .team_container .team_video video
-{
-    width:100%;
-    border: 8px solid rgb(161, 0, 83);
-    
-    outline: none;
-}
-.team .team_container .team_content
-{
-    width:40%;
-    padding:20px;
-    margin-left:50px;
-    margin-top: 0%;
-    font-size: small;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; 
-}
-
+  .brand-images{
+    grid-template-columns: repeat(2,1fr);
+  }
+  .brand-img{
+    width: 130px;
+  }
+  .footer-container{
+    grid-template-columns: 1fr;
+    row-gap: 6rem;
+  }
+  .footer-content{
+    justify-items: center;
+  }
+  .footer-linkContent{
+    justify-items: center;
   }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* Media Query for Mobile Devices */
-  @media (max-width: 480px) {
-   /*------------------------------------------------NAVBAR----------------------------------------*/
-.nav
-{
-    background-color: white;
-    z-index: 8;
-    padding-left: 50px;
-    padding-right: 20px;
-    display:flex;
-    box-shadow: 0px 3px 65px 0px rgba(0,0,0,.15);
 }
-.nav_top
-{
-    position:fixed;
-    top:0;
-    right:0;
-    left:0;
-}
-.logo
-{
-    float:left;
-    width: 50%;
-}
-.logo img
-{
-    padding: 8px;
-    width:60%;
-    margin-left:10%;
-}
-.nav_side
-{
-    float:right;
-    width:225%;
-    margin-top: 20px;
-}
-.nav_side a
-{
-    text-decoration: none;
-    margin-right: 8px;
-    margin-left:12px;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-left: 8px;
-    color: rgb(37, 0, 19);
-    font-weight: bold;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-size: 10px;
-    justify-content: center;
+@media screen and (max-width: 400px) {
+  .homeTitle{
+    font-size:3rem;
+  }
+  .menu-item{
+    flex-direction: column;
     align-items: center;
-    align-content: center;
-    text-align: center;
-    
-}
-.nav_side a:hover
-{
-    color: rgb(253, 0, 84);
-    transition: all 1s ease;
-}
-/*-------------------------------------------FIRST CAROUSEL----------------------------------------*/
-.slide
-{
-    padding:0px;
-    height: 30px;
-}
-.slide .slide_container
-{
-    text-align:center;
-}
-
-.slide_con
-{
-    background-image: url("images/milk-1.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh;
-    
-}
-.slide_con .slide_content
-{
-    padding-top: 20%;
-    margin-left: 0%;
-    margin-right: 0%;
-}
-.slide_con .slide_content h2
-{
-    color: rgb(44, 32, 16);
-    font-size: 300%;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-weight: bolder;
-    text-align: center;
-    line-height: 35px;
-    position: relative;
-}
-.slide_con .slide_content h2 span
-{
-    font-size:50%;
-    opacity: 0.9;
-    font-weight: 400;
-    line-height: 20px;
-}
-.slide_con .slide_content .slide_btn
-{
-    margin-top:10%;
-    text-align: center;
-    width:100%;
-    position: relative;
-}
-.slide_con .slide_content .slide_btn a
-{
-    text-decoration: none;
-    font-size: large;
-    margin:32%;
-    padding: 10px 20px;
-    font-weight: bold;
-    color: rgb(10, 19, 48);
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-    border: 4px solid rgb(168, 109, 109);
-    border-radius: 10px;
-    transition: 0.5s;
-}
-.slide_con .slide_content .slide_btn a:hover
-{
-    background-color: white;
-    color: rgb(37, 0, 19);
-    border: none;
-    border-bottom: 4px solid orange;
-    transition:0.5s;
-}
-/*------------------------------------------------SIDE----------------------------------------*/
-.side {
-    margin-top: 2%; /* Decrease top margin */
-    margin-bottom: 2%; /* Decrease bottom margin */
+    padding: 1rem;
+    row-gap: 2rem;
+  }
+  .menuItem-details{
+    margin-right: 0;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .menuItem-price{
+    padding-left: 0;
+    flex-direction: row;
+  }
+  .menuItem-des{
     text-align: center;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
 
-.side .left {
-    float: left;
-    
-}
-.side .left img {
-    max-width: 100%; /* Set a maximum width for the image */
-    height: auto; /* Maintain aspect ratio */
-}
-.side .right
-{
-    float:right;
-    padding-left:0%;
-    width:50%;
-   
-}
-.side .right h2 {
-    font-size: 100%;
-    font-weight: bold; /* Add font-weight property */
-}
-.side .right p
-{
-    width: 60%;
-    font-size: 55%;
-    margin-left:25%;
-    margin-top: 8%;
-}
-.side .right .side_btn
-{
-    margin-top:3%;
-}
-.side .right .side_btn a {
-    text-decoration: none;
-    font-size: small; /* Adjust font size to make it smaller */
-    margin: 3px; /* Decrease margin for spacing */
-    padding: 5px 10px; /* Adjust padding for a smaller button */
-    font-weight: bold;
-    color: black;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-    border: 2px solid black; /* Decrease border size */
-    border-radius: 5px; /* Decrease border radius */
-    transition: 0.5s;
 }
 
-.side .right .side_btn a:hover
-{
-    background-color: black;
-    color: white;
-    border: none;
-    border-bottom: 4px solid rgb(255, 34, 144);
-    transition:0.5s;
-}
 
-/*------------------------------------------------MAIN----------------------------------------*/
-.main
-{
-    background-image: url("images/milk-2.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 60vh;
-}
-.main .main_content
-{
-    padding: 20px;
-    text-align: center;
-}
-.main .main_content h2
-{
-    color: white;
-    background-color: rgb(10, 61, 136);
-    font-size: 40px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    font-weight: bolder;
-    text-align: center;
-    line-height: 35px;
-    width:60%;
-    padding: 40px;
-    padding-left: 80px;
-    padding-right: 100px;
-    border-radius: 50%;
-    margin-left: 120px;
-    margin-right: 200px;
-    margin-top: -10px;
-    border: 6px solid rgb(7, 126, 80);
-    box-shadow: 6px 6px rgba(0,0,0,.45);
-}
-.main .main_content h2 span
-{
-    font-size:30%;
-    opacity: 0.9;
-    font-weight: 200;
-    line-height: 20px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-/*--------------------------------------------PRODUCTS----------------------------------------*/
-.product
-{
+
+
+
+
+
+
+/* Menu */
+/* Base styles for all screen sizes */
+.product {
     padding-bottom: 50px;
 }
-.product h2
-{
+
+.product h2 {
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
     color: rgb(92, 0, 47);
     font-size: 35px;
     text-align: center;
     padding: 20px;
 }
-.product .product_container
-{
-    display:flex;
+
+.product .product_container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
     margin-left: 5%;
     margin-right: 5%;
 }
-.product .product_container .item
-{
-    width:25%;
+
+.product .product_container .item {
+    width: 23%;
     margin: 10px;
-    height: 10%;
+    height: auto; /* Allow items to adjust their height based on content */
 }
-.product .product_container .item:hover
-{
-    box-shadow:0px 3px 65px 0px rgb(255, 189, 165);
+
+.product .product_container .item:hover {
+    box-shadow: 0px 3px 65px 0px rgb(255, 189, 165);
 }
-.product .product_container .item .item_img
-{
-    width:100%;
-    height: 20%;
-    overflow:hidden;
+
+.product .product_container .item .item_img {
+    width: 100%;
+    height: auto; /* Allow images to adjust their height based on width */
+    overflow: hidden;
 }
-.product .product_container .item .item_img img
-{
-    width:100%;
-    height: 20%;
+
+.product .product_container .item .item_img img {
+    width: 100%;
+    height: auto; /* Allow images to adjust their height based on width */
 }
-.product .product_container .item .item_content
-{
+
+.product .product_container .item .item_content {
     text-align: center;
 }
-.product .product_container .item .item_content h3
-{
-    font-size: 10px;
+
+.product .product_container .item .item_content h3 {
+    font-size: 15px;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    line-height: 10px;
+    line-height: 2;
 }
-.product .product_container .item .item_content p
-{
-    font-size: 8px;
+
+.product .product_container .item .item_content p {
+    font-size: 15px;
     line-height: 15px;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
+
 .product .product_container .item .item_content a {
     text-decoration: none;
-    padding: 3px 5px;
-    font-size: small; /* Adjust font size */
+    padding: 5px 10px;
     font-weight: bold;
     color: rgb(212, 0, 106);
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
@@ -1132,75 +880,156 @@ footer p
     transition: 0.5s;
 }
 
-.product .product_container .item .item_content a:hover
-{
+.product .product_container .item .item_content a:hover {
     background-color: rgb(212, 0, 106);
     color: white;
     border: none;
-    transition:0.5s;
+    transition: 0.5s;
 }
 
-   
-   
-.team
-{
-    padding: 10px;
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .product .product_container .item {
+        width: 50%; /* Change the width of items for smaller screens */
+    }
 }
-.team h2
-{
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; 
-    color: rgb(92, 0, 47);
-    font-size: 25px;
-    text-align: center;
+
+@media (max-width: 480px) {
+    .product .product_container .item {
+        width: 100%; /* Make items full width on even smaller screens */
+    }
 }
-.team .team_container
-{
+
+
+
+/* team */
+* {
+    font-family: Nunito, sans-serif;
+  }
+  
+  .text-blk {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    line-height: 25px;
+  }
+  
+  .responsive-cell-block {
+    min-height: 75px;
+  }
+  
+  .responsive-container-block {
+    min-height: 75px;
+    height: fit-content;
+    width: 100%;
     display: flex;
-}
-.team .team_container .team_video
-{
-    width:50%;
-    padding:10px;
-}
-.team .team_container .team_video video
-{
-    width:130%;
-    border: 8px solid rgb(161, 0, 83);
-    outline: none;
-}
-.team .team_container .team_content
-{
-    width:60%;
-    padding:20px;
-    margin-left:50px;
-    margin-top: 0%;
-    font-size: small;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; 
-}
-
+    flex-wrap: wrap;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+    justify-content: space-evenly;
   }
   
-
-  
-
-
-
-
-
-
-
-  
-  
-  /* Additional Media Queries for Larger Screens (Desktop) */
-  @media (min-width: 1200px) {
-    /* Adjust styles for larger screens */
+  .outer-container {
+    padding-top: 10px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    background-color: rgb(244, 252, 255);
   }
   
-  /* Additional Media Queries for Extra Large Screens (Large Desktops) */
-  @media (min-width: 1600px) {
-    /* Adjust styles for extra large screens */
+  .inner-container {
+    max-width: 1320px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-bottom: 50px;
+    margin-left: auto;
   }
   
+  .section-head-text {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 48px;
+    color: rgb(0, 135, 177);
+    margin: 0 0 10px 0;
+  }
+  
+  .section-subhead-text {
+    font-size: 25px;
+    color: rgb(153, 153, 153);
+    line-height: 35px;
+    max-width: 470px;
+    text-align: center;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 60px;
+    margin-left: 0px;
+  }
+  
+  .img-wrapper {
+    width: 100%;
+  }
+  
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .social-media-links {
+    width: 125px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .name {
+    font-size: 25px;
+    font-weight: 700;
+    color: rgb(102, 102, 102);
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+  }
+  
+  .position {
+    font-size: 25px;
+    font-weight: 700;
+    color: rgb(0, 135, 177);
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 50px;
+    margin-left: 0px;
+  }
+  
+  .team-img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .team-card-container {
+    width: 280px;
+    margin: 0 0 40px 0;
+  }
+  
+  @media (max-width: 500px) {
+    .outer-container {
+      padding: 10px 20px 10px 20px;
+    }
+  
+    .section-head-text {
+      text-align: center;
+    }
+  }
+
 
 .new
   {
@@ -1211,3 +1040,8 @@ footer p
       color: rgb(228, 20, 65);
       font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; 
   }
+
+
+
+
+  
