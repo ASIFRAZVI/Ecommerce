@@ -1094,3 +1094,35 @@ footer p
     }
 }
 
+
+
+
+/*calender*/
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #05d3ee; /* Green background color */
+  color: #fff; /* White text color */
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button hover styles */
+.btn:hover {
+  background-color: #2e7560; /* Darker green on hover */
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+/* Animation for the button text */
+.btn span {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover span {
+  transform: rotate(10deg) scale(1.1); /* Rotate and scale the text on hover */
+}
